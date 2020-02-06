@@ -1,0 +1,33 @@
+{
+  "name": "pm2-list-rest",
+  "version": "1.0.0",
+  "description": "Module to expose `pm2 list` (process description list) as a REST API",
+  "main": "app.js",
+  "dependencies": {
+    "pmx": "latest",
+    "pm2": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincent GUILLOU",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vguillou/pm2-list-rest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vguillou/pm2-list-rest/issues"
+  },
+  "homepage": "https://github.com/vguillou/pm2-list-rest",
+  "config": {
+    "port": 3999
+  },
+  "apps": [
+    {
+      "merge_logs": true,
+      "max_memory_restart": "200M",
+      "script": "app.js"
+    }
+  ],
+  "license": "WTFPL"
+}
