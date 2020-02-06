@@ -1,17 +1,32 @@
 const pmx = require('pmx');
 const pm2 = require('pm2');
 const http = require('http');
+const pick = require('object.pick');
 
-pmx.initModule({}, pm2Module);
+pmx.initModule({}, startModule);
 
-function pm2Module(err, conf) {
+let excludedProcesses;
+let includedPm2EnvProperties;
+
+function startModule(err, conf) {
   if (err) return console.error('PM2 connection error', err);
 
   pm2.connect(function(e) {
     if (e) return console.error('PM2 connection error', e);
 
-    startHttpServer(conf.port);
+    const port = conf.port;
+    excludedProcesses = configStringToArray(conf['exclude-processes']);
+    includedPm2EnvProperties = configStringToArray(conf['include-pm2-env-properties']);
+    
+    startHttpServer(port);
   });
+}
+
+function configStringToArray(str) {
+  return (str || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(s => s.length);
 }
 
 function startHttpServer(port) {
@@ -49,8 +64,29 @@ const requestHandler = (request, response) => {
  * @param {import('pm2').ProcessDescription[]} processDescriptionList
  */
 function buildProcessData(processDescriptionList) {
-  // TODO allow to filter the response ?
-  return processDescriptionList;
+  return (processDescriptionList || [])
+    .filter(filterExludedProcesses)
+    .map(pickProcessDescriptionProperties);
+}
+
+/**
+ * @param {import('pm2').ProcessDescription} processDescription 
+ */
+function filterExludedProcesses(processDescription) {
+  return processDescription && processDescription.name && !excludedProcesses.includes(processDescription.name);
+}
+
+/**
+ * @param {import('pm2').ProcessDescription} processDescription 
+ */
+function pickProcessDescriptionProperties(processDescription) {
+  if (!includedPm2EnvProperties.length) return processDescription;
+  else {
+    return {
+      ...processDescription,
+      pm2_env: pick(processDescription.pm2_env, includedPm2EnvProperties),
+    };
+  }
 }
 
 /**
