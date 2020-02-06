@@ -1,6 +1,6 @@
 # pm2-list-rest
 
-[![GitHub version](https://badge.fury.io/gh/vguillou%2Fpm2-list-rest.svg)](https://badge.fury.io/gh/vguillou%2Fpm2-list-rest)
+<a href="https://www.npmjs.com/package/pm2-list-rest"><img alt="npm" src="https://img.shields.io/npm/v/pm2-list-rest"></a>
 
 _Module to expose `pm2 list` (process description list) as a REST API_
 
@@ -19,7 +19,7 @@ _Module to expose `pm2 list` (process description list) as a REST API_
 
 ```curl http://localhost:3999/pm2/list```
 
-## Constribute
+## Contribute
 
 ```sh
 # Install dependencies
