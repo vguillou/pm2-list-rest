@@ -48,10 +48,10 @@ pm2 install .
 curl http://localhost:3999/pm2/list
 
 # Check module logs
-pm2 logs pm2-test
+pm2 logs pm2-list-rest
 
 # Remove module
-pm2 delete pm2-test
+pm2 delete pm2-list-rest
 ```
 
 ## License
