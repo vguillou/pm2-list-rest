@@ -39,7 +39,7 @@ _Module to expose `pm2 list` (process description list) as a REST API_
 
 ```sh
 # Install dependencies
-npm install
+yarn install
 
 # Install the module
 pm2 install .
