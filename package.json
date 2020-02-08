@@ -1,15 +1,14 @@
 {
   "name": "pm2-list-rest",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Module to expose `pm2 list` (process description list) as a REST API",
-  "main": "app.js",
-  "dependencies": {
-    "object.pick": "latest",
-    "pm2": "latest",
-    "pmx": "latest"
-  },
+  "main": "index.js",
+  "files.js": [
+    "**/*.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js --format=pretty . --fix"
   },
   "author": "Vincent GUILLOU",
   "repository": {
@@ -29,8 +28,22 @@
     {
       "merge_logs": true,
       "max_memory_restart": "200M",
-      "script": "app.js"
+      "script": "index.js"
     }
   ],
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "dependencies": {
+    "object.pick": "latest",
+    "pm2": "latest",
+    "pmx": "latest"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-formatter-pretty": "^3.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
 }

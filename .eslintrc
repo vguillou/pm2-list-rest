@@ -1,0 +1,19 @@
+{
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": ["prettier"],
+    "rules": {
+        "consistent-return": "off",
+        "func-names": "off",
+        "no-console": "off",
+        "prettier/prettier": [
+            "warn",
+            {
+                "tabWidth": 4,
+                "semi": true,
+                "trailingComma": "es5",
+                "arrowParens": "always",
+                "singleQuote": true
+            }
+        ]
+    }
+}
